@@ -1,6 +1,7 @@
 import pointwise
 import load_data
 import block
+import cg
 import scipy as sp
 import scipy.sparse as sps
 import matplotlib.pyplot as plt
@@ -28,31 +29,35 @@ def main():
 	n_test = 1000
 	mat1 = sps.random(n_test, n_test, density=0.3, format='csc')
 	for i in range(n_test):
-		mat1[i,i] += n_test*0.2
+		mat1[i,i] += n_test*0.25
 	#print(mat1)
 	x_init = sps.random(n_test, 1, density=0.3, format='csc')
 	x_final = np.random.rand(n_test, 1)
 	for i in range (n_test):
 		if x_final[i] != 0:
 			x_final[i] += 0.1
+	#x_final = sps.csc_array(x_final)
 	b = mat1.dot(x_final)
+	#print("b dim: ", b.shape, "x_final shape:", x_final.shape)
 
 	# solve for x
 	#list_res_j, num_iter_j = pointwise.jacobi(x_init, mat1, b)
 	#list_res_g, num_iter_g = pointwise.GaussSeidel(x_init, mat1, b)
 
 	# try block algorithms
-	bsize = 10
-	num_blc = 100
+	bsize = 100
+	num_blc = 10
 	solver = 'sparse_chol'
-	list_res_j, num_iter_j = block.blc_jacobi(x_init, mat1, b, bsize,
-		num_blc, solver)
+	#list_res_j, num_iter_j = block.blc_jacobi(x_init, mat1, b, bsize,
+		#num_blc, solver)
+	result, list_res_cg, num_iter_g = cg.CG(x_init, mat1, b)
 	list_res_g, num_iter_g = block.blc_GaussSeidel(x_init, mat1, b, bsize,
 	num_blc, solver)
 
 	# plot the res and iteration
-	plt.plot(list_res_j, label='jacobi', color='red')
+	#plt.plot(list_res_j, label='jacobi', color='red')
 	plt.plot(list_res_g, label='GS', color='blue')
+	plt.plot(list_res_cg, label='CG', color='green')
 
 	plt.ylabel('residual')
 	plt.xlabel('iteration')
