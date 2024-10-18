@@ -15,7 +15,11 @@ def blc_jacobi(x_init, A, b, bsize, num_blc, solver):
 			print("wrong block size and block numer")
 			raise
 	res = 1000
-	tol = 1e-6 * np.linalg.norm(b)
+	tol = 0
+	if sps.issparse(b):
+		tol = 1e-6 * sps.linalg.norm(b)
+	else:
+		tol = 1e-6 * np.linalg.norm(b)
 	#print(tol)
 	x = x_init.copy()
 	num_iter = 0 
@@ -54,7 +58,11 @@ def blc_GaussSeidel(x_init, A, b, bsize, num_blc, solver):
 			print("wrong block size and block numer")
 			raise
 	res = 1000
-	tol = 1e-6 * np.linalg.norm(b)
+	tol = 0 
+	if sps.issparse(b):
+		tol = 1e-6*sps.linalg.norm(b)
+	else:
+		tol = 1e-6 * np.linalg.norm(b)
 	#print(tol)
 	x = x_init.copy()
 	num_iter = 0 

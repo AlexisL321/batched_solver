@@ -8,7 +8,11 @@ def jacobi (x_init, A, b):
 	print("called jacobi")
 	n = A.shape[1]
 	res = 1000
-	tol = 1e-6 * np.linalg.norm(b)
+	tol = 0
+	if sps.issparse(b):
+		tol = 1e-6*sps.linalg.norm(b)
+	else:
+		tol = 1e-6 * np.linalg.norm(b)
 	print(tol)
 	x = x_init.copy()
 	num_iter = 0
@@ -37,7 +41,11 @@ def GaussSeidel (x_init, A, b):
 	print("called gauss seidel")
 	n = A.shape[1]
 	res = 1000
-	tol = 1e-6 * np.linalg.norm(b)
+	tol = 0
+	if sps.issparse(b):
+		tol = 1e-6*sps.linalg.norm(b)
+	else:
+		tol = 1e-6 * np.linalg.norm(b)
 	print(tol)
 	x = x_init.copy()
 	num_iter = 0
@@ -61,3 +69,9 @@ def GaussSeidel (x_init, A, b):
 	return list_res, num_iter
 
 
+def pointwise_solver(x_init, A, b, solver):
+	if solver == 'jacobi' or solver == 'Jacobi' or solver == 'j':
+		return jacobi(x_init, A, b)
+	if solver == 'GaussSeidel' or solver == 'gaussseidel' or solver ==\
+	'gs':
+		return GaussSeidel(x_init, A, b)

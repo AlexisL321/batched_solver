@@ -16,14 +16,17 @@ def main():
 	path3 = '../data/2D_Square_Domain_UnStructured_26508.mat'
 	path4 = '../data/2D_Square_Domain_UnStructured_5408.mat'
 	#mat1, mat2, mat3, mat4 = load_data.load_all(path1, path2, path3, path4)
-	#num_row = mat1.shape[0]
-	#num_col = mat1.shape[1]
+	'''
+	mat1 = load_data.load_data(path1)
+	num_row = mat1.shape[0]
+	num_col = mat1.shape[1]
 
 	# randomly generate a sparse array b
-	#b = sps.random(num_row, 1, density=0.01, format='csr')
+	b = sps.random(num_row, 1, density=0.01, format='csr')
 
 	# initial guess of x
-	#x_init = sps.random(num_col, 1, density=0.01, format='csr')
+	x_init = sps.random(num_col, 1, density=0.01, format='csr')
+	'''
 
 	# test with a smaller matrix
 	n_test = 1000
@@ -51,12 +54,12 @@ def main():
 	#list_res_j, num_iter_j = block.blc_jacobi(x_init, mat1, b, bsize,
 		#num_blc, solver)
 	result, list_res_cg, num_iter_g = cg.CG(x_init, mat1, b)
-	list_res_g, num_iter_g = block.blc_GaussSeidel(x_init, mat1, b, bsize,
-	num_blc, solver)
+	#list_res_g, num_iter_g = block.blc_GaussSeidel(x_init, mat1, b, bsize,
+	#num_blc, solver)
 
 	# plot the res and iteration
 	#plt.plot(list_res_j, label='jacobi', color='red')
-	plt.plot(list_res_g, label='GS', color='blue')
+	#plt.plot(list_res_g, label='GS', color='blue')
 	plt.plot(list_res_cg, label='CG', color='green')
 
 	plt.ylabel('residual')
