@@ -69,6 +69,7 @@ def main():
 	plt.ylabel('residual')
 	plt.xlabel('iteration')
 	#plt.xlim(0, 1000)
+	plt.ylim(0, 10)
 	plt.legend()
 	plt.show()
 
