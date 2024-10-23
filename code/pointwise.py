@@ -4,7 +4,7 @@ import scipy as sp
 import scipy.sparse as sps
 import scipy.sparse.linalg as lg
 
-def jacobi (x_init, A, b):
+def jacobi (x_init, A, b, max_iter = 1000):
 	print("called jacobi")
 	n = A.shape[1]
 	res = 1000
@@ -28,16 +28,16 @@ def jacobi (x_init, A, b):
 			x[i] = (1/A[i,i]) * update
 
 		num_iter += 1
-		if num_iter > 1000:
+		if num_iter > max_iter:
 			break
 		res = lg.norm(x-x_init)
 		print(num_iter, ": ",res)
 		#print(x-x_init)
 		list_res.append(res)
 	
-	return list_res, num_iter
+	return x, list_res, num_iter
 
-def GaussSeidel (x_init, A, b):
+def GaussSeidel (x_init, A, b, max_iter = 1000):
 	print("called gauss seidel")
 	n = A.shape[1]
 	res = 1000
@@ -60,18 +60,18 @@ def GaussSeidel (x_init, A, b):
 			x[i] = (1/A[i,i]) * update
 
 		num_iter += 1
-		if num_iter > 1000:
+		if num_iter > max_iter:
 			break
 		res = lg.norm(x-x_init)
 		print(num_iter, ": ", res)
 		list_res.append(res)
 	
-	return list_res, num_iter
+	return x, list_res, num_iter
 
 
-def pointwise_solver(x_init, A, b, solver):
+def pointwise_solver(x_init, A, b, solver, max_iter=1000):
 	if solver == 'jacobi' or solver == 'Jacobi' or solver == 'j':
-		return jacobi(x_init, A, b)
+		return jacobi(x_init, A, b, max_iter=max_iter)
 	if solver == 'GaussSeidel' or solver == 'gaussseidel' or solver ==\
 	'gs':
-		return GaussSeidel(x_init, A, b)
+		return GaussSeidel(x_init, A, b, max_iter=max_iter)

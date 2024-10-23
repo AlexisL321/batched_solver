@@ -29,7 +29,7 @@ def main():
 	'''
 
 	# test with a smaller matrix
-	n_test = 1000
+	n_test = 100
 	mat1 = sps.random(n_test, n_test, density=0.3, format='csc')
 	for i in range(n_test):
 		mat1[i,i] += n_test*0.25
@@ -48,12 +48,13 @@ def main():
 	#list_res_g, num_iter_g = pointwise.GaussSeidel(x_init, mat1, b)
 
 	# try block algorithms
-	bsize = 100
+	bsize = 10
 	num_blc = 10
 	solver = 'sparse_chol'
 	#list_res_j, num_iter_j = block.blc_jacobi(x_init, mat1, b, bsize,
 		#num_blc, solver)
-	result, list_res_cg, num_iter_g = cg.CG(x_init, mat1, b)
+	#result, list_res_cg, num_iter_g = cg.CG_smoother(x_init, mat1, b, 'j', 3)
+	_,list_res_cg, num_iter_g = cg.CG(x_init, mat1, b)
 	#list_res_g, num_iter_g = block.blc_GaussSeidel(x_init, mat1, b, bsize,
 	#num_blc, solver)
 

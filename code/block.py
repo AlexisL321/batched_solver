@@ -5,7 +5,7 @@ import numpy as np
 import scipy.linalg.lapack as lapack
 import sksparse.cholmod as cholmod
 
-def blc_jacobi(x_init, A, b, bsize, num_blc, solver):
+def blc_jacobi(x_init, A, b, bsize, num_blc, solver, max_iter=1000):
 	print("called block jacobi")
 	n = A.shape[1]
 	if bsize * num_blc != n:
@@ -41,14 +41,14 @@ def blc_jacobi(x_init, A, b, bsize, num_blc, solver):
 			#print(x[j*bsize:(j+1)*bsize-1])
 
 		num_iter += 1
-		if num_iter > 1000:
+		if num_iter > max_iter:
 			break
 		res = sps.linalg.norm(x-x_init)
 		print(num_iter, ": ",res)
 		list_res.append(res)
-	return list_res, num_iter
+	return x, list_res, num_iter
 
-def blc_GaussSeidel(x_init, A, b, bsize, num_blc, solver):
+def blc_GaussSeidel(x_init, A, b, bsize, num_blc, solver, max_iter=1000):
 	print("called block Gauss-Seidel")
 	n = A.shape[1]
 	if bsize * num_blc != n:
@@ -83,12 +83,12 @@ def blc_GaussSeidel(x_init, A, b, bsize, num_blc, solver):
 			x[i*bsize:(i+1)*bsize] = update.copy()
 
 		num_iter += 1
-		if num_iter > 1000:
+		if num_iter > max_iter:
 			break
 		res = sps.linalg.norm(x-x_init)
 		print(num_iter, ": ",res)
 		list_res.append(res)
-	return list_res, num_iter
+	return x, list_res, num_iter
 
 # Sovle for Ax=b using a designated solver
 def solve(A, b, size, solver):	
@@ -166,3 +166,10 @@ def sparse_chol_solve(A, b, size):
 	factor = cholmod.cholesky(A)
 	x = factor(b)
 	return x
+
+def blc_solver(x_init, A, b, bsize, num_blc, solver, blc_solver, max_iter=1000):
+    if solver == 'jacobi' or solver == 'Jacobi' or solver == 'j':
+        return blc_jacobi(x_init, A, b, bsize, num_blc, blc_solver, max_iter=max_iter)
+    if solver == 'GaussSeidel' or solver == 'gaussseidel' or solver == \
+    'gs':
+        return blc_GaussSeidel(x_init, A, b, bsize, num_blc, blc_solver, max_iter=max_iter)
