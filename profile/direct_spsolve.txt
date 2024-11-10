@@ -1,0 +1,73 @@
+Sat Nov  9 13:57:41 2024    ../profile/direct_spsolve.prof
+
+         179 function calls in 257.465 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1  257.382  257.382  257.382  257.382 {built-in method scipy.sparse.linalg._dsolve._superlu.gssv}
+        1    0.036    0.036  257.454  257.454 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/linalg/_dsolve/linsolve.py:144(spsolve)
+        1    0.019    0.019    0.019    0.019 {built-in method scipy.sparse._sparsetools.csr_has_canonical_format}
+        1    0.009    0.009    0.009    0.009 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.006    0.006    0.006    0.006 {built-in method scipy.sparse._sparsetools.csc_tocsr}
+        1    0.006    0.006    0.006    0.006 {method 'ravel' of 'numpy.ndarray' objects}
+        1    0.002    0.002  257.456  257.456 /Users/flye/Downloads/batched_sparse/code_file/code/direct_sparse.py:25(direct_spsolve)
+        1    0.002    0.002    0.002    0.002 {built-in method scipy.sparse._sparsetools.csr_todense}
+        1    0.002    0.002    0.002    0.002 {built-in method numpy.zeros}
+        2    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_sputils.py:149(get_index_dtype)
+        1    0.000    0.000    0.007    0.007 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_csc.py:44(tocsr)
+        1    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_compressed.py:135(check_format)
+        1    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_sputils.py:24(upcast)
+        1    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_compressed.py:27(__init__)
+        1    0.000    0.000    0.011    0.011 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_compressed.py:1178(toarray)
+        4    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/numpy/core/getlimits.py:685(__init__)
+        3    0.000    0.000    0.000    0.000 {built-in method numpy.empty}
+        4    0.000    0.000    0.000    0.000 {method 'astype' of 'numpy.ndarray' objects}
+        2    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_base.py:1303(_get_index_dtype)
+        8    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_compressed.py:114(_getnnz)
+        1    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_matrix.py:22(_csr_container)
+        1    0.000    0.000    0.019    0.019 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_compressed.py:1210(has_canonical_format)
+        1    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_compressed.py:1295(prune)
+        1    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_sputils.py:296(check_shape)
+        3    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:645(parent)
+        3    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_sputils.py:384(is_pydata_spmatrix)
+        8    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_base.py:294(nnz)
+        1    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_base.py:113(__init__)
+        1    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_base.py:243(_asfptype)
+       20    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+        9    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}
+        1    0.000    0.000    0.002    0.002 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_base.py:1290(_process_toarray_args)
+        3    0.000    0.000    0.000    0.000 {method 'rpartition' of 'str' objects}
+        3    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_sputils.py:327(<genexpr>)
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.max}
+        7    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_data.py:24(dtype)
+       17    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/numpy/core/multiarray.py:503(can_cast)
+        1    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_compressed.py:1233(has_canonical_format)
+        6    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_matrix.py:64(get_shape)
+        3    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_base.py:73(_shape_as_2d)
+        3    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_base.py:1335(issparse)
+        4    0.000    0.000    0.000    0.000 {built-in method numpy.asarray}
+        1    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_data.py:21(__init__)
+        2    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/numpy/core/getlimits.py:696(min)
+        4    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
+        2    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_compressed.py:1270(has_sorted_indices)
+        2    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/_lib/_util.py:225(_prune_array)
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.any}
+        3    0.000    0.000    0.000    0.000 {built-in method numpy.array}
+        1    0.000    0.000    0.019    0.019 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_compressed.py:1239(sum_duplicates)
+        2    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_base.py:69(ndim)
+        1    0.000    0.000    0.000    0.000 {built-in method numpy.promote_types}
+        2    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_base.py:314(format)
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.hash}
+        4    0.000    0.000    0.000    0.000 {built-in method builtins.getattr}
+        2    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/numpy/core/getlimits.py:709(max)
+        2    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_sputils.py:392(convert_pydata_sparse_to_scipy)
+        1    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_csc.py:142(_swap)
+        1    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_sputils.py:240(isshape)
+        2    0.000    0.000    0.000    0.000 {built-in method _operator.index}
+        3    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_sputils.py:336(<genexpr>)
+        3    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/scipy/sparse/_csr.py:160(_swap)
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.hasattr}
+        1    0.000    0.000    0.000    0.000 /Users/flye/myenv/lib/python3.12/site-packages/numpy/core/multiarray.py:669(result_type)
+
+
