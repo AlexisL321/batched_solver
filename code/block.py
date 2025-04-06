@@ -8,7 +8,7 @@ import sksparse.cholmod as cholmod
 def blc_jacobi(x_init, A, b, bsize, num_blc, solver, max_iter=1000):
 	print("called block jacobi")
 	n = A.shape[1]
-	if bsize * num_blc != n:
+	if bsize * num_blc < n:
 		try:
 			raise NameError("wrong block size and block number")
 		except NameError:
@@ -51,7 +51,7 @@ def blc_jacobi(x_init, A, b, bsize, num_blc, solver, max_iter=1000):
 def blc_GaussSeidel(x_init, A, b, bsize, num_blc, solver, max_iter=1000):
 	print("called block Gauss-Seidel")
 	n = A.shape[1]
-	if bsize * num_blc != n:
+	if bsize * num_blc < n:
 		try:
 			raise NameError("wrong block size and block number")
 		except NameError:
