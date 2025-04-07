@@ -8,6 +8,7 @@
 #include <Eigen/Core>
 #include <Eigen/SparseCholesky>
 #include <Eigen/OrderingMethods>
+#include <Eigen/Cholesky>
 //#include <Accelerate/Accelerate.h>
 
 
@@ -83,34 +84,63 @@ class BlcJacobi {
 
 						}
 					}
-					Solve
+					Solve_s(i, update);
+
+					res = (*x-*x_init).norm();
+					*x_init = *x;
+					res_list->push_back(res);
 				}
 			}
 		}
 		void Solve_s(int i, Vec<T>& RHS){//sparse cholesky
 			SimplicialLLT<SpMat<T>> solver;
 			SpMat<T> block_mat = A->block(i*blc_size, i*blc_size, blc_size,
-					blc_size);
+					blc_size).eval();
 			Vec<T> x_blc(blc_size);
 
 			if (ordering == "N") {//natural ordering
 				NaturalOrdering<int> natural;
 				solver.analyzePattern(block_mat, natural);
-				solver.factorize(block_mat);
-				x_blc = sovler.sovle(RHS);
 			}
-			/*
-			   solver.compute(block_mat);
-			   if (solver.info() != Success) {//Success is an enum in Core module
-			   std::cout<<"solver.compute(A) failed."<<std::endl;
-			   exit(0);
-			   }
-			 */
+			else if (ordering == "AMD") {//AMD ordering
+				AMDOrdering<int> amd;
+				solver.analyzePattern(block_mat, amd);
+			}
+			if (solver.info() != Success) {//Success is an enum in Core module
+				std::cout<<"solver.analyzePattern() failed."<<std::endl;
+				exit(0);
+			}
+			solver.factorize(block_mat);
+			if (solver.info() != Success) {//Success is an enum in Core module
+				std::cout<<"solver.factorize(block_mat) failed."<<std::endl;
+				exit(0);
+			}
+			x_blc = sovler.sovle(RHS);
+			//solver.compute(block_mat);
 			if (solver.info() != Success) {
 				std::cout<<"solver.solve(RHS) failed."<<std::endl;
 				exit(0);
 			}
 			//update this->x with x_blc
+			x->segment(i*blc_size, blc_size) = x_blc;
+		}
+
+		//dense cholesky
+		void Solve_d(int i, Vec<T>& RHS){
+			Matrix<T, blc_size, blc_size> blc_mat = A->block(i*blc_size,
+					i*blc_size, blc_size, blc_size).eval().toDense();
+			LLT<Matrix<T, blc_size, blc_size>> solver(blc_size);
+			solver.compute(blc_mat);
+			if (solver.info() != Success) {//Success is an enum in Core module
+				std::cout<<"dense solver.compute(block_mat) failed."<<std::endl;
+				exit(0);
+			}
+			Vec<T> x_blc(blc_size);
+			x_blc = sovler.solve(RHS);
+			if (solver.info() != Success) {//Success is an enum in Core module
+				std::cout<<"dense solver.solve(block_mat) failed."<<std::endl;
+				exit(0);
+			}
 			x->segment(i*blc_size, blc_size) = x_blc;
 		}
 
