@@ -5,7 +5,10 @@
 #include <iostream>
 #include <Eigen/Sparse>
 
-using namespace std;
+using namespace Eigen;
+template<typename T> using SpMat = SparseMatrix<T>;
+template<typename T> using Trip = Triplet<T>;
+template<typename T> using Vec = Matrix<T, Dynamic, 1>;
 
 template<typename T>
 class CG {

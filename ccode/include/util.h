@@ -15,13 +15,19 @@ template<typename T> using Vec = Matrix<T, Dynamic, 1>;
 //print SpMat
 template<typename T>
 void print_matrix(SpMat<T>& A, int n) {
-
+	int num_col = A.outerSize();
+	for (int i = 0; i < num_col; i++) {
+		for (typename SpMat<T>::InnerIterator iter(A, i); iter; iter++) {
+			std::cout<<"("<<iter.row()<<", "<<iter.col()<<")"
+				<<iter.value()<<std::endl;
+		}
+	}
 }
 
 //deep copy submatrix from a SpMat type
 template<typename T>
 SpMat<T> submatrix_cpy(SpMat<T>& A, int row, int col, int row_blc, int
-col_blc) {
+		col_blc) {
 
 }
 
