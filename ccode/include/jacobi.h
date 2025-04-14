@@ -9,6 +9,7 @@
 #include <Eigen/SparseCholesky>
 #include <Eigen/OrderingMethods>
 #include <Eigen/Cholesky>
+#include "util.h"
 //#include <Accelerate/Accelerate.h>
 
 
