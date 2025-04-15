@@ -60,8 +60,8 @@ class BlcJacobi {
 			this->x = std::make_shared<Vec<T>>(n);
 			//this->A = std::make_shared<SpMat<T>>(n, n);
 			//this->b = std::make_shared<Vec<T>>(n);
-			this->A = A;
-			this->b = b;
+			this->A = &A;
+			this->b = &b;
 			//this->x = new Vec<T>(n);
 			//this->x_init = new Vec<T>(n);
 			*(this->x_init) = *x_init;

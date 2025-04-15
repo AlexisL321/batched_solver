@@ -38,8 +38,8 @@ class CG {
 			this->x = std::make_shared<Vec<T>>(n);
 			*(this->x_init) = *x_init;
 			*(this->x) = *x_init;
-			this->A = A;
-			this->b = b;
+			this->A = &A;
+			this->b = &b;
 			this->max_iter = max_iter;
 
 			res_list = std::make_unique<std::vector<double>>();
@@ -53,12 +53,20 @@ class CG {
 			r = *b - *A * (*x_init);
 			p = r;
 			num_iter = 0;
-			while (res > tol && num_iter < max_iter) {
-
+			while (num_iter < max_iter) {
+				Ap = (*A)*p;
+				rrT = r.norm();
+				alpha = rrT/(p.transpose()*Ap);
+				x = x + alpha * p;
+				r_ = r - alpha * Ap;
+				res = r_.norm();
+				res_list.push_back(res);
+				if (res < tol) break;
+				beta = res/rrT;
+				p = r_ + beta*p;
+				num_iter ++;
 			}
-
 		}
-
 }
 
 #endif
