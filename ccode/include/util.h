@@ -43,5 +43,4 @@ SpMat<T> submatrix_cpy(SpMat<T>& A, int row, int col, int row_blc, int
 	}
 }
 
-
 #endif
