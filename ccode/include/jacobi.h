@@ -144,5 +144,5 @@ class BlcJacobi {
 			}
 			x->segment(i*blc_size, blc_size) = x_blc;
 		}
-
+};
 #endif

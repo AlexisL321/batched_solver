@@ -67,6 +67,6 @@ class CG {
 				num_iter ++;
 			}
 		}
-}
+};
 
 #endif
