@@ -54,8 +54,10 @@ class MG{
 				for (int j = 0; j < lvls; j++) {
 					smooth(j);
 					//calculate residual r
-
+					Vec<T> r = this->RHS->at(j) -
+					this->discretizations->at(j)*this->X->at(j);
 					//restrict r and store it as b in RHS at j+1
+
 
 				}
 
