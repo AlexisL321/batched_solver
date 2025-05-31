@@ -4,7 +4,7 @@
 #include <cmath>
 #include <iostream>
 #include <Eigen/Sparse>
-#include "util.h"
+#include "util.hpp"
 
 using namespace Eigen;
 template<typename T> using SpMat = SparseMatrix<T>;

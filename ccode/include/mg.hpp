@@ -3,8 +3,8 @@
 #include <vector>
 #include <cmath>
 #include <memory>
-#include "util.h"
-#include "io.h"
+#include "util.hpp"
+#include "io.hpp"
 #include <Eigen/Sparse>
 
 using namespace Eigen;
